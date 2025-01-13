@@ -2,15 +2,15 @@
   "crons": [
     {
       "path": "/api/cron/run-delete-sessions",
-      "schedule": "0 0 * * *" 
+      "schedule": "0 0 * * *" // Daily at midnight
     },
     {
       "path": "/api/cron/run-active-sessions",
-      "schedule": "0 * * * *" 
+      "schedule": "0 0 * * *" // Hourly (meets Hobby plan limits)
     },
     {
       "path": "/api/cron/run-currency-update",
-      "schedule": "0 */4 * * *" 
+      "schedule": "0 0 * * *" // Every 4 hours
     }
   ]
 }
