@@ -1,8 +1,6 @@
-import React from "react";
-import Footer from "./article/footer2";
+import { emailVerificationLink, siteLogo, siteProduct } from "@/lib/site-info";
 import Image from "next/image";
 import Link from "next/link";
-import { siteLogo, siteProduct, emailVerificationLink } from "@/lib/site-info";
 const EmailVerificationPage = () => {
   return (
     <div className="flex flex-col w-full items-center min-h-screen bg-white">
@@ -28,7 +26,6 @@ const EmailVerificationPage = () => {
           Checkout These 67 Lifehacks that Will Boost the Quality of Your Life!
         </Link>
       </div>
-      <Footer />
     </div>
   );
 };
