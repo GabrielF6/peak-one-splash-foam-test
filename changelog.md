@@ -4,4 +4,4 @@
 
 ### first commit
 
-    jimmy initial commit..
+    jimmy initial commit...
