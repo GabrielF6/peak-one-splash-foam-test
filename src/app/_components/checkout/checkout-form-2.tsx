@@ -1,26 +1,26 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import { CheckoutPageType } from "@/interfaces/checkoutPage";
-import { useRouter } from "next/navigation";
 import { useSession } from "@/app/_context/SessionContext";
-import { useFormik } from "formik";
-import * as Yup from "yup";
-import { ProductInfoType } from "@/interfaces/productInfo";
-import { CustomerInfoType } from "@/interfaces/customerInfo";
-import DiscountBar from "./checkout-discount-bar";
-import QuantitySelector from "./checkout-quantity-selector";
-import CustomerInfo from "./checkout-customer-info";
-import PaymentOptions from "./checkout-payment-options";
-import MobilePaymentOptions from "./checkout-mobile-payment-options";
-import CheckoutCouponPop from "./checkout-coupon-pop";
-import PaypalPop from "./checkout-paypal-pop";
-import { delay } from "@/app/_utils/delay";
-import { encryptCreditCard } from "@/app/_utils/encryptUtils";
-import HandleSessionStart from "./checkout-handle-session-start";
-import { sendGAEvent } from "@next/third-parties/google";
-import { createJimmyKey } from "@/app/_utils/jimmyKeyUtils";
-import { emergencyStartSession } from "@/app/_utils/emergencySessionStart";
 import { useTracking } from "@/app/_context/TrackingContext";
+import { delay } from "@/app/_utils/delay";
+import { emergencyStartSession } from "@/app/_utils/emergencySessionStart";
+import { encryptCreditCard } from "@/app/_utils/encryptUtils";
+import { createJimmyKey } from "@/app/_utils/jimmyKeyUtils";
+import { CheckoutPageType } from "@/interfaces/checkoutPage";
+import { CustomerInfoType } from "@/interfaces/customerInfo";
+import { ProductInfoType } from "@/interfaces/productInfo";
+import { sendGAEvent } from "@next/third-parties/google";
+import { useFormik } from "formik";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import * as Yup from "yup";
+import CheckoutCouponPop from "./checkout-coupon-pop";
+import CustomerInfo from "./checkout-customer-info";
+import DiscountBar from "./checkout-discount-bar";
+import HandleSessionStart from "./checkout-handle-session-start";
+import MobilePaymentOptions from "./checkout-mobile-payment-options";
+import PaymentOptions from "./checkout-payment-options";
+import PaypalPop from "./checkout-paypal-pop";
+import QuantitySelectorHorizontal from "./checkout-quantity-selector-horizontal";
 
 type Props = {
   info: CheckoutPageType;
@@ -434,36 +434,34 @@ const CheckoutForm = ({ info }: Props) => {
         setCustomerInfo={setCustomerInfo}
         product={product}
       />
-      <div className="flex  w-full relative flex-col items-center bg-[#f1f4f8]">
+      <div className="flex  w-full relative flex-col items-start bg-[#f1f4f8]">
         <div id="payment-container" />
-        <div className="flex w-full max-w-[1100px] sm:px-4 pb-12 flex-wrap">
-          <div className="flex flex-col w-full  lg:w-1/2 px-2 lg:py-8 pt-4 sm:pt-8 pb-4">
-            <div className="bg-white p-4 rounded-lg border-[1px] border-[#ddd] flex">
-              <DiscountBar
-                product={product.product}
-                info={info}
-                couponActive={customerInfo.couponActive}
-                country={country}
-              />
-            </div>
-            <div className="bg-white p-4 rounded-lg border-[1px] border-[#ddd] mt-4">
-              <QuantitySelector
-                product={product}
-                info={info}
-                setProduct={setProduct}
-                couponActive={customerInfo.couponActive}
-                country={country}
-              />
-            </div>
-            <div className="bg-white p-4 rounded-lg border-[1px] border-[#ddd] mt-4 lg:hidden">
-              <MobilePaymentOptions firePaypal={firePaypal} loading={loading} />
-            </div>
-            <div className="bg-white p-4 rounded-lg border-[1px] border-[#ddd] mt-4">
-              <CustomerInfo formik={formik} />
-            </div>
+        <div className="flex w-full flex-col max-w-[620px] sm:px-4 pb-12 bg-[#ffffff]">
+          <div className="bg-white p-4 rounded-lg  flex">
+            <DiscountBar
+              product={product.product}
+              info={info}
+              couponActive={customerInfo.couponActive}
+              country={country}
+            />
           </div>
-          <div className="flex flex-col  w-full  lg:w-1/2 px-2 lg:py-8">
-            <div className="bg-white p-4 rounded-lg border-[1px] border-[#ddd] ">
+          <div className="bg-white p-4 rounded-lg  mt-4 h-auto">
+            <QuantitySelectorHorizontal
+              product={product}
+              info={info}
+              setProduct={setProduct}
+              couponActive={customerInfo.couponActive}
+              country={country}
+            />
+          </div>
+          <div className="bg-white p-4 rounded-lg border-[1px] border-[#ddd] mt-4 lg:hidden">
+            <MobilePaymentOptions firePaypal={firePaypal} loading={loading} />
+          </div>
+          <div className="bg-white p-4 rounded-lg  mt-4">
+            <CustomerInfo formik={formik} info={info} />
+          </div>
+          <div className="flex flex-col  w-full  lg:w-full px-2 lg:py-8">
+            <div className="bg-white p-4 rounded-lg  ">
               <PaymentOptions
                 info={info}
                 product={product}

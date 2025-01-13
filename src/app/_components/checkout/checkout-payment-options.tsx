@@ -1,14 +1,14 @@
-import React, { useEffect, useRef } from "react";
-import Image from "next/image";
-import {
-  GlobeAmericasIcon,
-  LockClosedIcon,
-  ChevronDownIcon,
-} from "@heroicons/react/24/solid";
 import { CheckoutPageType } from "@/interfaces/checkoutPage";
 import { ProductInfoType } from "@/interfaces/productInfo";
-import StateProvinceSelect from "./checkout-state-selector";
+import {
+  ChevronDownIcon,
+  GlobeAmericasIcon,
+  LockClosedIcon,
+} from "@heroicons/react/24/solid";
+import Image from "next/image";
+import React, { useEffect, useRef } from "react";
 import { PriceDisplaySimple } from "./checkout-price-display";
+import StateProvinceSelect from "./checkout-state-selector";
 
 type PaymentProps = {
   info: CheckoutPageType;
@@ -531,7 +531,7 @@ const PaymentOptions = ({
         </p>
         <input
           type="submit"
-          value={info.buttonCta}
+          value={info.template === "1" ? info.buttonCta : "Complete Checkout"}
           className="text-[18px] uppercase bg-[#29af5c] w-full py-8 mt-4 rounded-lg text-white font-bold green-text-shadow border-b-[3px] border-[#128e41] cursor-pointer hover:bg-[#0ebf52]"
         />
       </form>

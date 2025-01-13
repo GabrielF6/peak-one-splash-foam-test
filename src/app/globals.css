@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  @apply font-inter;
+}
+
 .green-text-shadow {
   text-shadow: 0 1px 1px #02672c;
 }
@@ -52,6 +56,22 @@
   position: absolute;
   white-space: nowrap;
   animation: ticker 9s linear infinite;
+}
+
+.templatetwo{
+  span:after{
+
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 12px;
+    width: calc(100% + 10px);
+    margin-left: -5px;
+    border-top: 2px solid #f00;
+    transform: rotate(-10deg);
+    -webkit-transform: rotate(-10deg);
+  }
+  
 }
 
 @keyframes ticker {

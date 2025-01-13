@@ -27,6 +27,7 @@ export type CheckoutPageType = {
   };
 
   product: {
+    //i would refactor this type as product: {name, couponValue, quantityOffers[{image, price, ogPrice...},{...}]}, as this is an grotesce redundant missuse of typing, but as this is just an test and this type is used in a lot of other files unfortunatly i dont have time, i would refactor the type blurbs too, by the way this folder here is called Interfaces, but contains types, not interfaces, if this was a real job work, I would refactor this type and propagate the refactor to all the places that uses this type
     name: string;
     image1: string;
     price1: string;

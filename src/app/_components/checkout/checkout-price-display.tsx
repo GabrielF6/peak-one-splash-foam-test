@@ -1,8 +1,7 @@
-import React from "react";
 import {
-  useCurrencyRates,
   countryToCurrency,
   currencySymbols,
+  useCurrencyRates,
 } from "@/app/_utils/currencyUtils";
 
 interface PriceDisplayProps {
@@ -68,8 +67,8 @@ export function PriceDisplaySimple({
         }`}
       >
         {symbol}
+        {convertedPrice.toFixed(digits)}
       </span>
-      {convertedPrice.toFixed(digits)}
     </>
   );
 }

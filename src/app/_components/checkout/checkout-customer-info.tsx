@@ -1,11 +1,18 @@
-import React, { useState, useEffect } from "react";
+import { CheckoutPageType } from "@/interfaces/checkoutPage";
 import { UserIcon } from "@heroicons/react/24/solid";
+import React, { useEffect, useState } from "react";
 
 type CustomerInfoProps = {
   formik: any;
 };
 
-const CustomerInfo = ({ formik }: CustomerInfoProps) => {
+const CustomerInfo = ({
+  formik,
+  info,
+}: {
+  formik: any;
+  info?: CheckoutPageType;
+}) => {
   const [formattedPhone, setFormattedPhone] = useState("");
 
   useEffect(() => {
@@ -57,6 +64,10 @@ const CustomerInfo = ({ formik }: CustomerInfoProps) => {
     }
   };
 
+  const inputLabelStyle = `${
+    info?.template === "1" ? "font-bold" : "font-inter"
+  } text-[16px] pb-2`;
+
   return (
     <>
       <div className="flex w-full justify-start items-center pb-6">
@@ -71,7 +82,11 @@ const CustomerInfo = ({ formik }: CustomerInfoProps) => {
       <form onSubmit={formik.handleSubmit}>
         <div className="flex w-full space-x-4">
           <div className="flex w-1/2 flex-col items-start justify-start">
-            <label className="font-bold text-[14px] pb-2">First Name</label>
+            <label
+              className={inputLabelStyle}
+            >
+              First Name
+            </label>
             <input
               type="text"
               name="firstName"
@@ -80,7 +95,7 @@ const CustomerInfo = ({ formik }: CustomerInfoProps) => {
               }}
               onBlur={formik.handleBlur}
               value={formik.values.firstName}
-              className="w-full border-[1px] border-[#333]  px-4 py-2 text-[16px] rounded-md sm:text-[14px]"
+              className="w-full border-[1px] border-[#333]  px-4 py-2 text-[16px] rounded-md sm:text-[16px]"
               placeholder="First Name"
             />
             {formik.touched.firstName && formik.errors.firstName ? (
@@ -90,7 +105,7 @@ const CustomerInfo = ({ formik }: CustomerInfoProps) => {
             ) : null}
           </div>
           <div className="flex w-1/2 flex-col items-start justify-start">
-            <label className="font-bold text-[14px] pb-2">Last Name</label>
+            <label className={inputLabelStyle}>Last Name</label>
             <input
               type="text"
               name="lastName"
@@ -99,7 +114,7 @@ const CustomerInfo = ({ formik }: CustomerInfoProps) => {
               }}
               onBlur={formik.handleBlur}
               value={formik.values.lastName}
-              className="w-full border-[1px] border-[#333]  px-4 py-2 text-[16px] rounded-md sm:text-[14px]"
+              className="w-full border-[1px] border-[#333]  px-4 py-2 text-[16px] rounded-md sm:text-[16px]"
               placeholder="Last Name"
             />
             {formik.touched.lastName && formik.errors.lastName ? (
@@ -111,7 +126,7 @@ const CustomerInfo = ({ formik }: CustomerInfoProps) => {
         </div>
         <div className="flex w-full space-x-4 mt-6">
           <div className="flex w-full flex-col items-start justify-start">
-            <label className="font-bold text-[14px] pb-2">Email Address</label>
+            <label className={inputLabelStyle}>Email Address</label>
             <input
               type="email"
               name="email"
@@ -120,7 +135,7 @@ const CustomerInfo = ({ formik }: CustomerInfoProps) => {
               }}
               onBlur={formik.handleBlur}
               value={formik.values.email}
-              className="w-full border-[1px] border-[#333]  px-4 py-2 text-[16px] rounded-md sm:text-[14px]"
+              className="w-full border-[1px] border-[#333]  px-4 py-2 text-[16px] rounded-md sm:text-[16px]"
               placeholder="Email Address"
             />
             {formik.touched.email && formik.errors.email ? (
@@ -130,14 +145,14 @@ const CustomerInfo = ({ formik }: CustomerInfoProps) => {
         </div>
         <div className="flex w-full space-x-4 mt-6 mb-6">
           <div className="flex w-full flex-col items-start justify-start">
-            <label className="font-bold text-[14px] pb-2">Phone Number</label>
+            <label className={inputLabelStyle}>Phone Number</label>
             <input
               type="text"
               name="phone"
               onChange={handleChange}
               onBlur={formik.handleBlur}
               value={formattedPhone}
-              className="w-full border-[1px] border-[#333]  px-4 py-2 text-[16px] rounded-md sm:text-[14px]"
+              className="w-full border-[1px] border-[#333]  px-4 py-2 text-[16px] rounded-md sm:text-[16px]"
               placeholder="Phone"
             />
             {formik.touched.phone && formik.errors.phone ? (
