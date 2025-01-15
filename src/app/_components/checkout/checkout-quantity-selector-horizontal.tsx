@@ -1,9 +1,10 @@
 import { delay } from "@/app/_utils/delay";
 import { CheckoutPageType } from "@/interfaces/checkoutPage";
 import { ProductInfoType } from "@/interfaces/productInfo";
-import { Cog6ToothIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { BestSeller } from "../best-seller/best-seller";
+import { FormSectionHeader } from "../form-section-header/form-section-header";
 import { SaveSeal } from "../save-seal/SaveSeal";
 import { PriceDisplaySimple } from "./checkout-price-display";
 import CustomCheckbox from "./checkout-select-quantity-checkbox";
@@ -141,7 +142,7 @@ const QuantitySelectorHorizontal = ({
 
     return (
       <div //i would make this a component in another file, but unforunately i dont have time right now for a test, if this was an actual job work I would create another file
-        className={`flex w-full sm:w-full rounded-md p-[18px] cursor-pointer h-[203px] transition-all ${
+        className={`flex w-full relative sm:w-full rounded-md p-[18px] cursor-pointer h-[203px] transition-all ${
           product.product === Number(index) - 1
             ? "border-[#126abc] border-[2px] bg-[#ffffcb]"
             : "border-[2px] border-[#c2c2c2]"
@@ -157,6 +158,7 @@ const QuantitySelectorHorizontal = ({
           );
         }}
       >
+        {Number(index) === 2 && <BestSeller />}
         <div className="flex flex-col w-1/3 sm:w-1/2 justify-center gap-y-[20px] items-start">
           <CustomCheckbox
             checked={product.product === Number(index) - 1}
@@ -227,11 +229,21 @@ const QuantitySelectorHorizontal = ({
         className="flex w-full flex-col justify-between items-center pb-6 "
         id="quantity-selector"
       >
-        <div className="flex w-full">
-          <Cog6ToothIcon className="h-[16px] w-[16px] mr-2" />
-          <h3 className="font-bold text-[16px]">Select Quantity</h3>
+        <FormSectionHeader
+          icon="frm-hdr-icn1"
+          title="Select Quantity"
+          subtitle={`How many ${info.product.name} units do you want?`}
+        />
+
+        <div className="flex items-center bg-[#ffe7e7] w-full rounded-md p-[10px] mb-[35px]">
+          <div className="w-[13px] h-[18px] flex justify-center items-center bg-[url('/images/splash-foam/fire-img.png')] bg-contain bg-no-repeat bg-center text-white font-bold font-inter text-[20px] pt-[8px] leading-[22px] text-center uppercase" />
+          <div className="pl-[8px]">
+            <span className="text-red-500 font-bold">High Demand:</span>
+            <span className=" "> 87 people are looking this offer!</span>
+          </div>
         </div>
-        <div className="flex flex-col w-full gap-y-[25px] h-auto">
+
+        <div className="flex flex-col w-full gap-y-[45px] h-auto">
           <ProductCard index="1" />
           <ProductCard index="2" />
 

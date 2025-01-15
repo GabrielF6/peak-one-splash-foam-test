@@ -1,6 +1,7 @@
 import { CheckoutPageType } from "@/interfaces/checkoutPage";
 import { UserIcon } from "@heroicons/react/24/solid";
 import React, { useEffect, useState } from "react";
+import { FormSectionHeader } from "../form-section-header/form-section-header";
 
 type CustomerInfoProps = {
   formik: any;
@@ -9,9 +10,11 @@ type CustomerInfoProps = {
 const CustomerInfo = ({
   formik,
   info,
+  isTemplateTwo = false,
 }: {
   formik: any;
   info?: CheckoutPageType;
+  isTemplateTwo?: boolean;
 }) => {
   const [formattedPhone, setFormattedPhone] = useState("");
 
@@ -71,10 +74,20 @@ const CustomerInfo = ({
   return (
     <>
       <div className="flex w-full justify-start items-center pb-6">
-        <UserIcon className="h-[16px] w-[16px] mr-2" />
-        <h3 className="font-bold text-[16px] hidden lg:block">
-          Step 2: Customer Information
-        </h3>
+        {!isTemplateTwo ? (
+          <>
+            <UserIcon className="h-[16px] w-[16px] mr-2" />
+            <h3 className="font-bold text-[16px] hidden lg:block">
+              Step 2: Customer Information
+            </h3>
+          </>
+        ) : (
+          <FormSectionHeader
+            icon="frm-hdr-icn2"
+            title="Customer Information"
+            subtitle="Order Confirmation Details Will Be Sent Here"
+          />
+        )}
         <h3 className="font-bold text-[16px] lg:hidden">
           Step 3: Customer Information
         </h3>
@@ -82,11 +95,7 @@ const CustomerInfo = ({
       <form onSubmit={formik.handleSubmit}>
         <div className="flex w-full space-x-4">
           <div className="flex w-1/2 flex-col items-start justify-start">
-            <label
-              className={inputLabelStyle}
-            >
-              First Name
-            </label>
+            <label className={inputLabelStyle}>First Name</label>
             <input
               type="text"
               name="firstName"

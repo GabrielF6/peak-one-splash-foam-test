@@ -13,9 +13,9 @@ import { useFormik } from "formik";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import * as Yup from "yup";
-import CheckoutCouponPop from "./checkout-coupon-pop";
+import { ExpressCheckout } from "../express-checkout/express-checkout";
+import { OfferTimer } from "../offer-timer/offer-timer";
 import CustomerInfo from "./checkout-customer-info";
-import DiscountBar from "./checkout-discount-bar";
 import HandleSessionStart from "./checkout-handle-session-start";
 import MobilePaymentOptions from "./checkout-mobile-payment-options";
 import PaymentOptions from "./checkout-payment-options";
@@ -68,6 +68,7 @@ const CheckoutForm = ({ info }: Props) => {
   const [showPop, setShowPop] = useState(false);
   const [showPaypalPop, setShowPaypalPop] = useState(false);
   const [country, setCountry] = useState("US");
+  const [discountPercentage, setDiscountPercentage] = useState(0);
   const [product, setProduct] = useState<ProductInfoType>({
     product: 1,
     productName: `2x ${info.product.name}`,
@@ -427,6 +428,20 @@ const CheckoutForm = ({ info }: Props) => {
     getCountry();
   }, []);
 
+  const currentPrice =
+    info.product[
+      `price${product.product + 1}` as "price1" | "price2" | "price3" | "price4"
+    ];
+
+  const currentOgPrice =
+    info.product[
+      `ogPrice${product.product + 1}` as
+        | "ogPrice1"
+        | "ogPrice2"
+        | "ogPrice3"
+        | "ogPrice4"
+    ];
+
   return (
     <>
       <HandleSessionStart
@@ -434,18 +449,15 @@ const CheckoutForm = ({ info }: Props) => {
         setCustomerInfo={setCustomerInfo}
         product={product}
       />
-      <div className="flex  w-full relative flex-col items-start bg-[#f1f4f8]">
+      <div className="flex  w-full relative flex-col items-center bg-[#f1f4f8] font-inter">
         <div id="payment-container" />
         <div className="flex w-full flex-col max-w-[620px] sm:px-4 pb-12 bg-[#ffffff]">
-          <div className="bg-white p-4 rounded-lg  flex">
-            <DiscountBar
-              product={product.product}
-              info={info}
-              couponActive={customerInfo.couponActive}
-              country={country}
-            />
-          </div>
           <div className="bg-white p-4 rounded-lg  mt-4 h-auto">
+            <div className="bg-[#fff1af] p-4 rounded-lg  flex mb-[35px]">
+              <OfferTimer
+                percent={Number(currentPrice) / Number(currentOgPrice)}
+              />
+            </div>
             <QuantitySelectorHorizontal
               product={product}
               info={info}
@@ -453,14 +465,15 @@ const CheckoutForm = ({ info }: Props) => {
               couponActive={customerInfo.couponActive}
               country={country}
             />
+            <ExpressCheckout />
           </div>
           <div className="bg-white p-4 rounded-lg border-[1px] border-[#ddd] mt-4 lg:hidden">
             <MobilePaymentOptions firePaypal={firePaypal} loading={loading} />
           </div>
           <div className="bg-white p-4 rounded-lg  mt-4">
-            <CustomerInfo formik={formik} info={info} />
+            <CustomerInfo formik={formik} info={info} isTemplateTwo />
           </div>
-          <div className="flex flex-col  w-full  lg:w-full px-2 lg:py-8">
+          <div className="flex flex-col  w-full  lg:w-full px-2 ">
             <div className="bg-white p-4 rounded-lg  ">
               <PaymentOptions
                 info={info}
@@ -470,20 +483,12 @@ const CheckoutForm = ({ info }: Props) => {
                 firePaypal={firePaypal}
                 country={country}
                 setCountry={setCountry}
+                isTemplateTwo
               />
             </div>
           </div>
         </div>
-        <CheckoutCouponPop
-          info={info}
-          activateCoupon={activateCoupon}
-          showPop={showPop}
-          setShowPop={setShowPop}
-          formik={formik}
-          initialCustomerInfo={initialCustomerInfo}
-          showPaypalPop={showPaypalPop}
-          loading={loading}
-        />
+
         <PaypalPop
           info={info}
           showPaypalPop={showPaypalPop}
