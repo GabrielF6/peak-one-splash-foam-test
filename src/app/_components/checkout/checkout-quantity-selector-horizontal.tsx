@@ -142,7 +142,7 @@ const QuantitySelectorHorizontal = ({
 
     return (
       <div //i would make this a component in another file, but unforunately i dont have time right now for a test, if this was an actual job work I would create another file
-        className={`flex w-full relative sm:w-full rounded-md p-[18px] cursor-pointer h-[203px] transition-all ${
+        className={`flex w-full relative sm:w-full rounded-md p-[18px] cursor-pointer h-[172px] md:h-[203px] transition-all ${
           product.product === Number(index) - 1
             ? "border-[#126abc] border-[2px] bg-[#ffffcb]"
             : "border-[2px] border-[#c2c2c2]"
@@ -174,6 +174,7 @@ const QuantitySelectorHorizontal = ({
               width={159} // in this case i had a doubt if you wanted the image exactly like your example w= 255 h = 118 because of croping, aspect ration problems well known in ecommerce front end, but i decided to speed up letting same height
               height={118}
               alt="Quantity 1"
+              className="w=[200px] h-[93px] md:w-[255px] md:h-[118px] object-contain"
             />
             {Number(index) !== 1 && (
               <SaveSeal
@@ -185,7 +186,7 @@ const QuantitySelectorHorizontal = ({
           </div>
         </div>
         <div className="flex w-2/3 sm:w-1/2 flex-col justify-center  text-[#282828] text-center">
-          <div className="flex flex-row sm:flex-col justify-center items-end w-full space-x-2 sm:space-x-0">
+          <div className="flex flex-row flex-col justify-center items-end w-full space-x-2 sm:space-x-0">
             <p className="text-[16px] templatetwo  relative">
               {/* {info.product.ogPrice1} */}
               <PriceDisplaySimple
@@ -196,7 +197,7 @@ const QuantitySelectorHorizontal = ({
             </p>
 
             <p
-              className="text-[30px] text-[#000000]  font-bold font-inter"
+              className="text-[24px] md:text-[30px] text-[#000000]  font-bold font-inter"
               id="price1"
             >
               {/* ${price1.toFixed(2)} */}
@@ -207,7 +208,7 @@ const QuantitySelectorHorizontal = ({
               />
             </p>
             <p
-              className="text-[19px] font-inter text-[#26b80e]  font-bold"
+              className="text-[15px] md:text-[19px] font-inter text-[#26b80e]  font-bold"
               id="price1"
             >
               {/* ${price1.toFixed(2)} */}
@@ -235,11 +236,16 @@ const QuantitySelectorHorizontal = ({
           subtitle={`How many ${info.product.name} units do you want?`}
         />
 
-        <div className="flex items-center bg-[#ffe7e7] w-full rounded-md p-[10px] mb-[35px]">
+        <div className="flex items-center justify-center bg-[#ffe7e7] w-full rounded-md p-[10px] mb-[35px]">
           <div className="w-[13px] h-[18px] flex justify-center items-center bg-[url('/images/splash-foam/fire-img.png')] bg-contain bg-no-repeat bg-center text-white font-bold font-inter text-[20px] pt-[8px] leading-[22px] text-center uppercase" />
-          <div className="pl-[8px]">
-            <span className="text-red-500 font-bold">High Demand:</span>
-            <span className=" "> 87 people are looking this offer!</span>
+          <div className="pl-[8px] ">
+            <span className="text-red-500 font-bold text-[13px] md:text-[17px]">
+              High Demand:
+            </span>
+            <span className=" text-[13px] md:text-[17px]">
+              {" "}
+              87 people are looking this offer!
+            </span>
           </div>
         </div>
 

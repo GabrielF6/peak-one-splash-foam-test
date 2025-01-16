@@ -17,7 +17,6 @@ import { ExpressCheckout } from "../express-checkout/express-checkout";
 import { OfferTimer } from "../offer-timer/offer-timer";
 import CustomerInfo from "./checkout-customer-info";
 import HandleSessionStart from "./checkout-handle-session-start";
-import MobilePaymentOptions from "./checkout-mobile-payment-options";
 import PaymentOptions from "./checkout-payment-options";
 import PaypalPop from "./checkout-paypal-pop";
 import QuantitySelectorHorizontal from "./checkout-quantity-selector-horizontal";
@@ -467,9 +466,7 @@ const CheckoutForm = ({ info }: Props) => {
             />
             <ExpressCheckout />
           </div>
-          <div className="bg-white p-4 rounded-lg border-[1px] border-[#ddd] mt-4 lg:hidden">
-            <MobilePaymentOptions firePaypal={firePaypal} loading={loading} />
-          </div>
+    
           <div className="bg-white p-4 rounded-lg  mt-4">
             <CustomerInfo formik={formik} info={info} isTemplateTwo />
           </div>

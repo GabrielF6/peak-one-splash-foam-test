@@ -80,6 +80,9 @@ const CustomerInfo = ({
             <h3 className="font-bold text-[16px] hidden lg:block">
               Step 2: Customer Information
             </h3>
+            <h3 className="font-bold text-[16px] lg:hidden">
+              Step 3: Customer Information
+            </h3>
           </>
         ) : (
           <FormSectionHeader
@@ -88,9 +91,6 @@ const CustomerInfo = ({
             subtitle="Order Confirmation Details Will Be Sent Here"
           />
         )}
-        <h3 className="font-bold text-[16px] lg:hidden">
-          Step 3: Customer Information
-        </h3>
       </div>
       <form onSubmit={formik.handleSubmit}>
         <div className="flex w-full space-x-4">

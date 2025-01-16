@@ -23,18 +23,22 @@ export const OfferTimer = ({ percent }: { percent: number }) => {
 
   return (
     <div className="flex items-center">
-      <div className="w-[76px] h-[76px] flex justify-center items-center bg-[url('/images/splash-foam/save-seal.png')] bg-contain bg-no-repeat bg-center text-white font-bold font-inter text-[20px] pt-[8px] leading-[22px] text-center uppercase">
+      <div className="md:w-[76px] md:h-[76px] w-[45px] h-[45px] flex justify-center items-center bg-[url('/images/splash-foam/save-seal.png')] bg-contain bg-no-repeat bg-center text-white font-bold font-inter text-[12px] md:text-[20px] pt-[0px] md:pt-[8px] leading-[13px] md:leading-[22px] text-center uppercase">
         {`${Math.round((1 - percent) * 100)}%`}
         <br />
         OFF
       </div>
       <div className="pl-[8px]">
-        <h3 className="uppercase font-bold">
-          <span className="text-red-500 uppercase">Hurry!</span> Limited To 100
-          Spots Only!
+        <h3 className="uppercase font-bold text-[14px] md:text-[19px] ">
+          <span className="text-red-500 uppercase text-[14px] md:text-[19px] ">
+            Hurry!
+          </span>{" "}
+          Limited To 100 Spots Only!
         </h3>
-        <p className="flex items-center space-x-2">
-          <span>Your spot is reserved for</span>
+        <p className="flex items-center space-x-2 ">
+          <span className="text-[14px] md:text-[19px]">
+            Your spot is reserved for
+          </span>
           <img
             src="/images/splash-foam/clock-icon.png"
             alt=""
